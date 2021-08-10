@@ -1,3 +1,9 @@
+<?php 
+use App\Http\Controllers\ProductController;
+if(session()->has('user')){
+$total_prod_cart=ProductController::cartitem();
+}
+?>
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -14,8 +20,8 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
+        <li class="active"><a href="#">links <span class="sr-only">(current)</span></a></li>
+        <li><a href="#"></a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -29,22 +35,25 @@
           </ul>
         </li>
       </ul>
-      <form class="navbar-form navbar-left">
+      <form class="navbar-form navbar-left" action="{{url('search')}}" method="POST" >
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
+          @csrf
+          <input type="text" name="qry" class="form-control" placeholder="Search">
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
+        <li><a href="#">cart(  @if(session()->has('user'))   {{$total_prod_cart}}@else 0 @endif )</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+        @if(session()->has('user'))  
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{session()->get('user')->name;}} <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+            <li><a href="{{url('/logout')}}">Logout</a></li>
+            @else
+            <li><a href="{{url('/login')}}">Login</a></li>
+            @endif
+            
+          
           </ul>
         </li>
       </ul>

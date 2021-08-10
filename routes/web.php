@@ -3,6 +3,8 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Models\Product;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,9 +26,23 @@ Route::get('/login', function () {
     return view('login');
 });
 
+Route::get('/logout',function(){
+    //Session::forget('yourKeyGoesHere')
+   
+    Session()->forget('user');
+    if(session()->has('user')){
+    echo "have";
+    }else{
+        return redirect('/login');
+    }
+   
+});
 //Route::get('users/{id}',['App\Http\Controllers\UserController','show']);
 
 //Route::view('/login','login');
 //Route::get('demo',['App\Http\Controllers\ProductController','demo']);
 Route::post('login',[UserController::class,'login']);
 Route::get('product',[ProductController::class,'index']);
+Route::get('detail/{id}',[ProductController::class,'detail']);
+Route::post('search',[ProductController::class,'search']);
+Route::post('add-to-cart',[ProductController::class,'addtocart']);
