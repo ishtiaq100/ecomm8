@@ -46,3 +46,4 @@ Route::get('product',[ProductController::class,'index']);
 Route::get('detail/{id}',[ProductController::class,'detail']);
 Route::post('search',[ProductController::class,'search']);
 Route::post('add-to-cart',[ProductController::class,'addtocart']);
+Route::get('cartlist',[ProductController::class,'cartlist']);
