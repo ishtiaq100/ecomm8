@@ -9,8 +9,8 @@
        <p>{{$pdata->catg}}</p>
        <p>{{$pdata->price}}</p>
        <p>{{$pdata->descp}}</p>
-       <button>Add to cart</button>
-       <button>Buy Now</button>
+       <a href="{{url('/deletecartitem/'.$pdata->cid)}}">Delete Item</a>
+      
 
   </div>
   @endforeach

@@ -43,7 +43,7 @@ $total_prod_cart=ProductController::cartitem();
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">cart(  @if(session()->has('user'))   {{$total_prod_cart}}@else 0 @endif )</a></li>
+        <li><a href="{{url('/cartlist')}}">cart(  @if(session()->has('user'))   {{$total_prod_cart}}@else 0 @endif )</a></li>
         <li class="dropdown">
         @if(session()->has('user'))  
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{session()->get('user')->name;}} <span class="caret"></span></a>
